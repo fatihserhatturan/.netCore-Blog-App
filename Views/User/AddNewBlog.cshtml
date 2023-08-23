@@ -1,0 +1,44 @@
+﻿@model EntityLayer.Concrete.BlogImage
+@{
+    ViewData["Title"] = "AddNewBlog";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+
+    @Html.Label("Blog Başlığı")
+    @Html.TextBoxFor(x=>x.BlogTitle, new {@class= "form-control"})
+    <br />
+    @Html.Label("Blog Kategori")
+    @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.values,new{@class="form-control"})
+   
+  
+    <br />
+    @Html.Label("Blog Tarihi")
+    @Html.TextBoxFor(x=>x.BlogDate, new {@class= "form-control"})
+    <br />
+    @Html.Label("Blog Yazarı")
+    @Html.DropDownListFor(x=>x.AuthorID,(List<SelectListItem>)ViewBag.valuesAuthor,new{@class="form-control"})
+    <br />
+    @Html.Label("Blog İçeriği")
+    @Html.TextAreaFor(x=>x.BlogContent,5,10, new {@class= "form-control"})
+    <br />
+    @Html.Label("Blog Kapak Resmi")
+    <input type="file" name="Image1" />
+    <br />
+    @Html.Label("Blog  Resmi1")
+    <input type="file" name="Image2" />
+    <br />
+    @Html.Label("Blog  Resmi2")
+    <input type="file" name="Image3" />
+    <br />
+    @Html.Label("Blog  Resmi3")
+    <input type="file" name="Image4" />
+    <br />
+    @Html.Label("Blog  Resmi4")
+    <input type="file" name="Image5" />
+  
+    <br/>
+    <button class="btn btn-info">Kaydet</button>
+</form>
+

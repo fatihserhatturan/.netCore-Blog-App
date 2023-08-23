@@ -1,0 +1,50 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "BlogByCategory";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+<div class="site-section bg-white">
+    <div class="container">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-lg-4 mb-4">
+               
+                <div class="entry2">
+
+                        <a href="single.html"><img src="@item.BlogImage" style="width: 400px;height:250px" alt="Image" class="img-fluid rounded"></a>
+                    <div class="excerpt">
+                            <span class="post-category text-white bg-info mb-3">@item.Category.CategoryName</span>
+
+                            <h2><a href="single.html">@item.BlogTitle</a></h2>
+                        <div class="post-meta align-items-center text-left clearfix">
+                                <figure class="author-figure mb-0 mr-3 float-left"><img src="@item.Author.AuthorImage"  alt="Image" class="img-fluid"></figure>
+                                <span class="d-inline-block mt-1">Yazar <a href="#">@item.Author.AuthorName</a></span>
+                                <span>&nbsp;-&nbsp; @(((DateTime)item.BlogDate).ToString("dd-MMM-yyyy"))</span>
+                        </div>
+
+                            <p>@item.BlogContent.Substring(0,item.BlogContent.Substring(0,100).LastIndexOf(" ")) ,,,</p>
+
+                            <form asp-action="BlogDetails" asp-controller="Blog" method="get">
+                                <input type="hidden" name="blogId" value="@item.BlogID" />
+                                <input type="submit" value="Okumaya Devam Et">
+                            </form>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            }
+        </div>
+        @Html.PagedListPager((IPagedList)Model,page=>Url.Action("BlogByCategory",new {page}))
+    </div>
+</div>
+
+
+@await Component.InvokeAsync("Footer")

@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "BlogDetails";
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@model int;
+
+@await Component.InvokeAsync("BlogCover",Model)
+
+<section class="site-section py-lg">
+    <div class="container">
+
+        <div class="row blog-entries element-animate">
+
+            <div class="col-md-12 col-lg-8 main-content">
+
+                @await Component.InvokeAsync("BlogReadAll",Model)
+                <br/>
+                @await Component.InvokeAsync("BlogGallery",Model)
+                @await Component.InvokeAsync("ViewComments",Model)
+                @await Html.PartialAsync("~/Views/CommentAdd/AddComment.cshtml",Model)
+
+            </div>
+
+            <div class="col-md-12 col-lg-4 sidebar">
+           
+                @await Component.InvokeAsync("AuthorAbout",Model)
+
+              @*  @await Component.InvokeAsync("BlogDetailsCategoryList",Model)*@
+            </div>
+        </div>
+    </div>
+</section>
+
+@await Component.InvokeAsync("Footer")

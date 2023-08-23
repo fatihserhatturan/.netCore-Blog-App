@@ -1,0 +1,96 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modal Örneği</title>
+    <link rel="stylesheet" href="~/miniblog/css/slider.css">
+</head>
+
+<body>
+
+  @foreach(var item in Model){
+
+    <div class="row">
+        <img src="@item.BlogImage" style="width:19%" onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+        <img src="@item.BlogImage2" style="width:19%" onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+        <img src="@item.BlogImage3" style="width:19%" onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+        <img src="@item.BlogImage4" style="width:19%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+        <img src="@item.BlogImage5" style="width:19%" onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+    </div>
+
+        <div id="myModal" class="modal">
+    <span class="close cursor" onclick="closeModal()">&times;</span>
+    <div class="modal-content">
+
+    <div class="mySlides">
+    <div class="numbertext">1 / 5</div>
+                    <img src="@item.BlogImage" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+    <div class="numbertext">2 / 5</div>
+                    <img src="@item.BlogImage2" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+    <div class="numbertext">3 / 5</div>
+                    <img src="@item.BlogImage3" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+    <div class="numbertext">4 / 5</div>
+                    <img src="@item.BlogImage4" style="width:100%">
+    </div>
+    <div class="mySlides">
+    <div class="numbertext">5 / 5</div>
+                    <img src="@item.BlogImage5" style="width:100%">
+    </div>
+    
+
+    </div>
+    </div>
+
+    }
+    
+</body>
+
+</html>
+<script>
+    function openModal() {
+        document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
+    }
+</script>

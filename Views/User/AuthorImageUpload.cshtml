@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "AuthorImageUpload";
+    Layout = "~/Views/Shared/_AuthorLayout.cshtml";
+}
+
+@model EntityLayer.Concrete.AuthorImage
+
+
+<form class="form-group" method="post" enctype="multipart/form-data">
+
+  
+    @Html.Label("Profil Resmi")
+    <input type="file" name="Image" />
+    <br />
+    <button class="btn btn-info">Kaydet</button>
+</form>
+
+
+

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "AdminBlogList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@model IEnumerable<EntityLayer.Concrete.Blog>
+
+    <h2>Blog Listesi</h2>
+
+    <br />
+
+    <table class="table table-bordered">
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>Başlık</th>
+            <th>Katgeori</th>
+            <th>Yazar</th>
+            <th>Tarih</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+            <th>Detaylar</th>
+            <th>Yorumlar</th>
+        </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.BlogID</td>
+            <td>@item.BlogTitle</td>
+            <td>@item.Category.CategoryName</td>
+            <td>@item.Author.AuthorName</td>
+            <td>@item.BlogDate.ToShortDateString()</td>
+            <td><a href="/Blog/deleteBlog/@item.BlogID" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Blog/UpdateBlog/@item.BlogID" class="btn btn-success">Güncelle</a></td>
+            <td>
+                <form asp-action="BlogDetails" asp-controller="Blog" method="get">
+                    <input type="hidden" name="blogId" value="@item.BlogID" />
+                    <input type="submit" class="btn btn-warning" value="Detaylar">
+                </form>
+            </td>
+            <td><a href="/Blog/GetCommentForAdmin/@item.BlogID" class="btn btn-dark">Yorumlar</a></td>
+        </tr>
+    }
+</table>
+
+<a href="/Blog/AddNewBlog/" class="btn btn-primary">Yeni Blog Ekle</a>
+

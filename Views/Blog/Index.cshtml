@@ -1,0 +1,21 @@
+﻿@using EntityLayer.Concrete;
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@using ErzincanForumApp.Controllers;
+
+@model IPagedList<EntityLayer.Concrete.Blog>
+@{
+   
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+@await Html.PartialAsync("FeaturedPosts","Blog")
+
+@await Html.PartialAsync("BlogList",Model)
+
+@await Html.PartialAsync("~/Views/MailSubscribe/AddMail.cshtml");
+
+@await Component.InvokeAsync("Footer")
+
+
+
